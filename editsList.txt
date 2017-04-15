@@ -1,0 +1,14 @@
+Nate Cowley
+	Edited the child process creation loop in server.c
+
+Dave Mathews
+	Edited the child process creation loop in client.c
+
+Fortythree Shiaohongtu  
+	-----------
+
+Basem Amorah
+	-----------
+
+Chennasri Kaveti
+	-----------
