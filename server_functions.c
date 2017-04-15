@@ -9,14 +9,10 @@
 #ifndef SERVER_FUNCTIONS_C
 #define SERVER_FUNCTIONS_C
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/socket.h>
+#include "server.h"
 
 /* TUTORIAL_BEGIN */
+// Function that prints an error message to stderr and exits.
 void error(const char *message) {
   perror(message);
   exit(1);
@@ -26,12 +22,17 @@ void error(const char *message) {
 extern int tcpSockFD;
 extern int udpSockFD;
 
+/*This is to make sure the port does not remain in use after process is terminated
+ *
+ * Please note that SIGSTOP and SIGKILL cannot be caught or handled. */
+
 void interruptHandler(int signalNo) {
   close(tcpSockFD);
   close(udpSockFD);
   exit(0);
 }
 
+//Process a TCP connection and sends a confirmation message to the socket
 void processTCPRequest(int socketFD) {
   if (socketFD < 0) {
     return;
@@ -60,6 +61,7 @@ void processTCPRequest(int socketFD) {
   free(buffer);  /* Free buffer to prevent a memory leak. */
 }
 
+//Proces a UDP connection and sends a confirmation message
 void processUDPRequest(int socketFD, struct sockaddr *address) {
   if (socketFD < 0) {
     return;

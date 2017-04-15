@@ -30,20 +30,24 @@ void processTCPConnection(int socketFD, struct sockaddr *serverAddress,
 void processUDPConnection(int socketFD, struct sockaddr *serverAddress,
                           char *buffer, int bufferSize);
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
   /* TUTORIAL_BEGIN */
   int sockfd, portno, n;
   struct sockaddr_in serv_addr;
   struct hostent *server;
 
-  if (argc < 3) {
+  if (argc < 3)
+  {
     fprintf(stderr, "usage %s hostname port\n", argv[0]);
     exit(0);
   }
 
   portno = atoi(argv[2]);
   server = gethostbyname(argv[1]);
-  if (server == NULL) {
+    
+  if (server == NULL)
+  {
     fprintf(stderr, "error, no such host\n");
     exit(0);
   }
@@ -58,20 +62,24 @@ int main(int argc, char *argv[]) {
 
   char input[100];
   char socketType;
-  while (1) {
+    
+  while (1)
+  {
     printf("Please choose socket type ('U' for UDP, 'T' for TCP): ");
     scanf("%s", input);
     socketType = input[0];
 
-    if (socketType == 'u' || socketType == 'U' || socketType == 't' || socketType == 'T') {
+    if (socketType == 'u' || socketType == 'U' || socketType == 't' || socketType == 'T')
+    {
       break;
     }
   }
 
   /* This is to clear any redundant characters (including newlines) in the standard input stream */
-  char c;
-  while ((c = getchar()) != '\n' && c != EOF) {
-  }
+//  char c;
+//  while ((c = getchar()) != '\n' && c != EOF)
+//  {
+//  }
 
   const size_t BUFFER_SIZE = 256;
   /* calloc() sets the memory to zero, so no need to call bzero here. */
@@ -83,18 +91,26 @@ int main(int argc, char *argv[]) {
   fgets(buffer, BUFFER_SIZE - 1, stdin);
   /* TUTORIAL_END */
 
-  if (socketType == 't' || socketType == 'T') {
+  if (socketType == 'T' || socketType == 't')
+  {
     /* We will communicate with server using TCP */
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    if (sockfd < 0) {
+      
+    if (sockfd < 0)
+    {
       error("error opening socket");
     }
 
     processTCPConnection(sockfd, (struct sockaddr *)&serv_addr, buffer, BUFFER_SIZE);
-  } else {
+  }
+  
+  else
+  {
     /* We will communicate with server using UDP */
     sockfd = socket(AF_INET, SOCK_DGRAM, 0);
-    if (sockfd < 0) {
+      
+    if (sockfd < 0)
+    {
       error("error opening socket");
     }
 
