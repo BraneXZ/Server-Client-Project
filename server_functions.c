@@ -40,7 +40,7 @@ void processTCPRequest(int socketFD) {
 
   const size_t BUFFER_SIZE = 256;
   /* calloc() sets the memory to zero, so no need to call bzero here. */
-  char *buffer = calloc(BUFFER_SIZE, sizeof(char));
+  char *buffer = (char*)calloc(BUFFER_SIZE, sizeof(char));
 
   int n = (int)read(socketFD, buffer, BUFFER_SIZE - 1);
   if (n < 0) {
@@ -69,7 +69,7 @@ void processUDPRequest(int socketFD, struct sockaddr *address) {
 
   const size_t BUFFER_SIZE = 256;
   /* calloc() sets the memory to zero, so no need to call bzero here. */
-  char *buffer = calloc(BUFFER_SIZE, sizeof(char));
+  char *buffer = (char*)calloc(BUFFER_SIZE, sizeof(char));
 
   socklen_t addressLength = sizeof(*address);
   int numBytes = (int)recvfrom(socketFD, buffer, BUFFER_SIZE - 1, 0, address, &addressLength);

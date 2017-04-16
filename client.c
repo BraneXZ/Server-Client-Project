@@ -6,29 +6,7 @@
  * All other code was written from scratch.
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <netdb.h>
-
-/* Prints an error message to stderr and exits. */
-void error(const char *);
-
-/* Tries to create a TCP connection to the server. If successful, it then sends a message,
- * and displays the server's response
- */
-void processTCPConnection(int socketFD, struct sockaddr *serverAddress,
-                          char *buffer, int bufferSize);
-
-/* Tries to create a UDP connection to the server. If successful, it then sends a message,
- * and displays the server's response
- */
-void processUDPConnection(int socketFD, struct sockaddr *serverAddress,
-                          char *buffer, int bufferSize);
+#include "client.h"
 
 int main(int argc, char *argv[])
 {
@@ -76,21 +54,21 @@ int main(int argc, char *argv[])
   }
 
   /* This is to clear any redundant characters (including newlines) in the standard input stream */
-//  char c;
-//  while ((c = getchar()) != '\n' && c != EOF)
-//  {
-//  }
+  char c;
+  while ((c = getchar()) != '\n' && c != EOF)
+  {
+  }
 
   const size_t BUFFER_SIZE = 256;
-  /* calloc() sets the memory to zero, so no need to call bzero here. */
-  char *buffer = calloc(BUFFER_SIZE, sizeof(char));
+  /* calloc() sets the memory to zero, so no need to call bzero here.a*/
+  char *buffer = (char*)calloc(BUFFER_SIZE, sizeof(char));
 
   /* TUTORIAL_BEGIN */
   /* Read message from stdin */
   printf("Please enter the message: ");
   fgets(buffer, BUFFER_SIZE - 1, stdin);
   /* TUTORIAL_END */
-
+	
   if (socketType == 'T' || socketType == 't')
   {
     /* We will communicate with server using TCP */

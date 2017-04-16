@@ -80,7 +80,6 @@ int main(int argc, char *argv[]) {
   {
     // TUTORIAL_BEGIN
     listen(tcpSockFD, 5);
-    listen(udpSockFD, 5);
     // TUTORIAL_END
 
     FD_ZERO(&fdSet);
@@ -93,11 +92,9 @@ int main(int argc, char *argv[]) {
 	{
       error("Error in select function");
     }
-
+    //Author: Chennasri Kaveti
     if (FD_ISSET(tcpSockFD, &fdSet)) 
 	{
-      // Handle TCP connection
-
       // TUTORIAL_BEGIN
       clilen = sizeof(cli_addr);
       newtcpSockFD = accept(tcpSockFD, (struct sockaddr *)&cli_addr, &clilen);
@@ -131,7 +128,6 @@ int main(int argc, char *argv[]) {
         close(newtcpSockFD);
       }
     }
-
     if (FD_ISSET(udpSockFD, &fdSet)) 
 	{
       // Handle UDP connection 
