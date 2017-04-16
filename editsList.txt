@@ -11,4 +11,4 @@ Basem Amorah
 	Wrote client.c and server.c
 
 Chennasri Kaveti
-	Edited client.c and server.c
+	Edited client.c and server.c, debugged compilation errors and issues with Makefile
