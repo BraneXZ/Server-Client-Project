@@ -1,14 +1,13 @@
 Nate Cowley
-	Edited the child process creation loop in server.c
+	Wrote the UDP connection in server.c and edited server_functions.c
+
 
 Dave Mathews
-	Edited the child process creation loop in client.c
+	Edited the TCP connection in server.c and edited server_funcitons.c
 
-Fortythree Shiaohongtu  
-	-----------
+Fortythree Shiaohongtu	Wrote the Makefile, client.h, server.h and edited client_functions.c and server_functions.c 
 
 Basem Amorah
-	-----------
-
+	Wrote client.c server.c
 Chennasri Kaveti
-	-----------
+	Edited client.c, server.c
